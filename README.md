@@ -6,10 +6,11 @@ Both Qt4 and Qt5 are supported.
 
 ## Usage
 
-There are two configuration options in the main menu:
+There are three configuration options in the main menu:
 
 * Mouse tracking: when this is checked, mouse events will be printed on mouse movement, even if no button is pressed
 * Ignore mouse during tablet use: this option causes the test program to ignore mouse motion events when the tablet is used. According to Qt documentation, Qt should not be sending mouse events when tablet events are accepted, but it seems to do so anyway (at least some versions)
+* Disable tablet events: ignore tablet events and treat the tablet as a mouse. This setting can be used to find differences between mouse and tablet event handling.
 
 The **show event log** menu option will pop up a dialog showing the recorded events. **Save event log** will save the event log as a text file. The log can be edited in the dialog before saving.
 
