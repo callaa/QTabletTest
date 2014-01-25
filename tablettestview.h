@@ -38,6 +38,9 @@ public slots:
 	//! Set whether mouse move events should be ignored when tablet pen is down
 	void setIgnoreMouseTablet(bool ignore);
 
+	//! Set whether tablet events should be ignored altogether
+	void setDisableTablet(bool disable);
+
 signals:
 	void logEvent(const QString &message);
 
@@ -62,6 +65,7 @@ private:
 
 	bool _pendown;
 	bool _ignoremousetablet;
+	bool _disabletablet;
 
 };
 

@@ -71,7 +71,7 @@ namespace {
 }
 
 TabletTestView::TabletTestView(QWidget *parent) :
-	QGraphicsView(parent), _pendown(false)
+	QGraphicsView(parent), _pendown(false), _disabletablet(false)
 {
 	_testscene = new QGraphicsScene(this);
 
@@ -113,6 +113,11 @@ void TabletTestView::setTracking(bool tracking)
 void TabletTestView::setIgnoreMouseTablet(bool ignore)
 {
 	_ignoremousetablet = ignore;
+}
+
+void TabletTestView::setDisableTablet(bool disable)
+{
+	_disabletablet = disable;
 }
 
 void TabletTestView::resizeEvent(QResizeEvent *event)
@@ -195,6 +200,9 @@ void TabletTestView::wheelEvent(QWheelEvent *event)
 
 bool TabletTestView::viewportEvent(QEvent *event)
 {
+	if(_disabletablet)
+		return QGraphicsView::viewportEvent(event);
+
 	if(event->type() == QEvent::TabletMove) {
 		event->accept();
 		showTabletEvent(static_cast<QTabletEvent*>(event));

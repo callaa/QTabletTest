@@ -49,6 +49,10 @@ TabletTester::TabletTester(QWidget *parent)
 	ignoremouse->setChecked(true);
 	connect(ignoremouse, SIGNAL(toggled(bool)), testview, SLOT(setIgnoreMouseTablet(bool)));
 
+	QAction *disabletablet = mainmenu->addAction("Disable tablet events");
+	disabletablet->setCheckable(true);
+	connect(disabletablet, SIGNAL(toggled(bool)), testview, SLOT(setDisableTablet(bool)));
+
 	mainmenu->addSeparator();
 
 	mainmenu->addAction("Show event &log...", _eventlog, SLOT(show()));
