@@ -17,33 +17,22 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
+#ifndef MAIN_H
+#define MAIN_H
 
-#include "main.h"
-#include "tablettester.h"
+#include <QApplication>
+#include <QTabletEvent>
 
-#include <QDebug>
+class TabletTesterApp : public QApplication {
+Q_OBJECT
+public:
+	TabletTesterApp(int & argc, char ** argv );
 
-TabletTesterApp::TabletTesterApp(int &argc, char **argv)
-	: QApplication(argc, argv)
-{
-}
+signals:
+	void tabletProximity(bool near, QTabletEvent::PointerType pointer);
 
-bool TabletTesterApp::event(QEvent *e) {
-	if(e->type() == QEvent::TabletEnterProximity || e->type() == QEvent::TabletLeaveProximity) {
-		QTabletEvent *te = static_cast<QTabletEvent*>(e);
-		qDebug() << (e->type() == QEvent::TabletEnterProximity ? "near" : "leave") << te->pointerType();
-		emit tabletProximity(e->type() == QEvent::TabletEnterProximity, te->pointerType());
+protected:
+	bool event(QEvent *e);
+};
 
-		return true;
-	}
-	return QApplication::event(e);
-}
-
-int main(int argc, char *argv[])
-{
-	TabletTesterApp a(argc, argv);
-	TabletTester w;
-	w.show();
-
-	return a.exec();
-}
+#endif // MAIN_H

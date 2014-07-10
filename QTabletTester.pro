@@ -19,4 +19,5 @@ SOURCES += main.cpp\
 
 HEADERS  += tablettester.h \
     tablettestview.h \
-    eventlogdialog.h
+    eventlogdialog.h \
+    main.h
